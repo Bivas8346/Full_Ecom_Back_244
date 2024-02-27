@@ -1,0 +1,97 @@
+<%- include ('../Common/Head')-%> <%- include ('../Common/Sidebar')-%>
+
+<!-- ======== main-wrapper start =========== -->
+<main class="main-wrapper">
+  <%- include ('../Common/Navbar')-%>
+
+  <!-- ========== table components start ========== -->
+  <section class="table-components">
+    <div class="container-fluid">
+      <!-- ========== title-wrapper start ========== -->
+      <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="title">
+              <h2>Tables</h2>
+            </div>
+          </div>
+          <!-- end col -->
+          <div class="col-md-6">
+            <div class="breadcrumb-wrapper">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="#0">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Tables
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- ========== title-wrapper end ========== -->
+
+      <!-- ========== tables-wrapper start ========== -->
+      <div class="tables-wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- input style start -->
+
+            <div class="card-style mb-30">
+              <h6 class="mb-25">Input Fields</h6>
+              <form method="post" action="/teamupdate">
+                <input type="hidden" name="t_id" value="<%=tme._id%>">
+                <div class="input-style-1">
+                  <label>Team Member Name</label>
+                  <input type="text" name="name" placeholder="Name" value="<%=tme.name%>"/>
+                </div>
+                <!-- end input -->
+                <div class="input-style-1">
+                  <label>Team Member Email</label>
+                  <input type="text" name="email" placeholder="Email" value="<%=tme.email%>"/>
+                </div>
+                <!-- end input -->
+                <div class="input-style-1">
+                  <label>Team Member Phone Number</label>
+                  <input type="text" name="phone" placeholder="Phone No" value="<%=tme.phone%>"/>
+                </div>
+                <!-- end input -->
+                <div class="input-style-1">
+                  <label>Member position</label>
+                  <input type="text" name="position" placeholder="Position" value="<%=tme.position%>"/>
+                </div>
+                <!-- end input -->
+                <div class="input-style-2">
+                  <input type="file" placeholder="Product Images" />
+                  <span class="icon"> <i class="lni lni-photo"></i> </span>
+                </div>
+                <!-- end input -->
+                <input
+                  class="main-btn active-btn rounded-full btn-hover"
+                  value="Submit"
+                  type="submit"
+                />
+              </form>
+            </div>
+
+            <!-- end card -->
+            <!-- ======= input style end ======= -->
+          </div>
+          <!-- end col -->
+        </div>
+      </div>
+      <!-- ========== tables-wrapper end ========== -->
+    </div>
+    <!-- end container -->
+  </section>
+  <!-- ========== table components end ========== -->
+
+  <%- include ('../Common/Footer')-%>
+</main>
+<!-- ======== main-wrapper end =========== -->
+<%- include ('../Common/Foot')-%>

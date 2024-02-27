@@ -1,0 +1,176 @@
+<%- include ('../Common/Head')-%> <%- include ('../Common/Sidebar')-%>
+
+<!-- ======== main-wrapper start =========== -->
+<main class="main-wrapper">
+  <%- include ('../Common/Navbar')-%>
+
+  <!-- ========== table components start ========== -->
+  <section class="table-components">
+    <div class="container-fluid">
+      <!-- ========== title-wrapper start ========== -->
+      <div class="title-wrapper pt-30">
+        <div class="row align-items-center">
+          <div class="col-md-6">
+            <div class="title">
+              <h2>Tables</h2>
+            </div>
+          </div>
+          <!-- end col -->
+          <div class="col-md-6">
+            <div class="breadcrumb-wrapper">
+              <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item">
+                    <a href="#0">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active" aria-current="page">
+                    Tables
+                  </li>
+                </ol>
+              </nav>
+            </div>
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- ========== title-wrapper end ========== -->
+
+      <!-- ========== tables-wrapper start ========== -->
+      <div class="tables-wrapper">
+        <div class="row">
+          <div class="col-lg-12">
+            <!-- input style start -->
+
+            <div class="card-style mb-30">
+              <h6 class="mb-25">Input Fields</h6>
+              <form method="post" action="/teamadd">
+                <div class="input-style-1">
+                  <label>Team Member Name</label>
+                  <input type="text" name="name" placeholder="Name" />
+                </div>
+                <!-- end input -->
+                <div class="input-style-1">
+                  <label>Team Member Email</label>
+                  <input type="text" name="email" placeholder="Email" />
+                </div>
+                <!-- end input -->
+                <div class="input-style-1">
+                  <label>Team Member Phone Number</label>
+                  <input type="text" name="phone" placeholder="Phone No" />
+                </div>
+                <!-- end input -->
+                <div class="input-style-1">
+                  <label>Member position</label>
+                  <input type="text" name="position" placeholder="Position" />
+                </div>
+                <!-- end input -->
+                <div class="input-style-2">
+                  <input type="file" placeholder="Product Images" />
+                  <span class="icon"> <i class="lni lni-photo"></i> </span>
+                </div>
+                <!-- end input -->
+                <input
+                  class="main-btn active-btn rounded-full btn-hover"
+                  value="Submit"
+                  type="submit"
+                />
+              </form>
+            </div>
+
+            <!-- end card -->
+            <!-- ======= input style end ======= -->
+          </div>
+          <!-- end col -->
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card-style mb-30">
+              <h6 class="mb-10">Data Table</h6>
+              <p class="text-sm mb-20">
+                For basic styling—light padding and only horizontal dividers—use
+                the class table.
+              </p>
+              <div class="table-wrapper table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h6>#</h6>
+                      </th>
+                      <th>
+                        <h6>Name</h6>
+                      </th>
+                      <th>
+                        <h6>Email</h6>
+                      </th>
+                      <th>
+                        <h6>Phone</h6>
+                      </th>
+                      <th>
+                        <h6>Position</h6>
+                      </th>
+                      <th>
+                        <h6>Manage</h6>
+                      </th>
+                      <th>
+                        <h6>Action</h6>
+                      </th>
+                    </tr>
+                    <!-- end table row-->
+                  </thead>
+                  <tbody>
+                    <%for (let tabl of team){%>
+                    <tr>
+                      <td>
+                        <div class="employee-image">
+                          <img src="assets/images/lead/lead-2.png" alt="" />
+                        </div>
+                      </td>
+                      <td class="min-width">
+                        <p><%=tabl.name%></p>
+                      </td>
+                      <td class="min-width">
+                        <p><a href="#0"><%=tabl.email%></a></p>
+                      </td>
+                      <td class="min-width">
+                        <p><%=tabl.phone%></p>
+                      </td>
+                      <td class="min-width">
+                        <p><%=tabl.position%></p>
+                      </td>
+                      <td class="min-width">
+                        <a href="/teamedit/<%=tabl._id%>" class="status-btn success-btn">Edit</a>
+                      </td>
+                      <td>
+                        <div class="action">
+                          <a href="/teamdelet/<%=tabl._id%>" class="text-danger">
+                            <i class="lni lni-trash-can"></i>
+                          </a>
+                        </div>
+                      </td>
+                    </tr>
+                    <!-- end table row -->
+                    <%}%>
+                  </tbody>
+                </table>
+                <!-- end table -->
+              </div>
+            </div>
+            <!-- end card -->
+          </div>
+          <!-- end col -->
+        </div>
+        <!-- end row -->
+      </div>
+      <!-- ========== tables-wrapper end ========== -->
+    </div>
+    <!-- end container -->
+  </section>
+  <!-- ========== table components end ========== -->
+
+  <%- include ('../Common/Footer')-%>
+</main>
+<!-- ======== main-wrapper end =========== -->
+<%- include ('../Common/Foot')-%>
