@@ -9,6 +9,8 @@ const AboutModel = require("../Model/about");
 const TeamModel = require("../Model/team");
 const UserModel = require("../Model/user");
 const CategoryModel = require("../Model/category");
+const SubcategoryModel = require("../Model/subcategory");
+const ProductModel = require("../Model/product");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const path = require("path");
@@ -278,18 +280,18 @@ exports.user = (req, res) => {
   // res.render("Component/User", { title: "User Data Table" });
 
   UserModel.find()
-  .then((user) => {
-    console.log(user);
-    res.render("Component/User", {
-      user,
-      title: "User Data Table",
+    .then((user) => {
+      console.log(user);
+      res.render("Component/User", {
+        user,
+        title: "User Data Table",
+      });
+    })
+    .catch((error) => {
+      res.render("Component/User", {
+        Error: `Error Occured: ${user}`,
+      });
     });
-  })
-  .catch((error) => {
-    res.render("Component/User", {
-      Error: `Error Occured: ${user}`,
-    });
-  });
 };
 
 // Admin Category Part
@@ -310,31 +312,42 @@ exports.categoryadd = (req, res) => {
 // Admin Subcategory Part
 
 exports.subcategoryadd = (req, res) => {
-  BannerModel.find()
-    .then((banner) => {
-      console.log(banner);
-      res.render("Component/Subcategory", {
-        banner,
-        title: "Banner Data Adding Form",
+  SubcategoryModel.find()
+    .then((subcate) => {
+      console.log(subcate);
+      CategoryModel.find().then((result) => {
+        res.render("Component/Subcategory", {
+          title: "Subcategory Data Adding Form",
+          displayData1: subcate,
+          displayData: result,
+        });
       });
     })
     .catch((error) => {
-      res.render("Component/Subcategory", { Error: `Error Occured: ${banner}` });
+      res.render("Component/Subcategory", {
+        Error: `Error Occured: ${subcate}`,
+      });
     });
 };
 
 // Admin Products Part
 
 exports.productadd = (req, res) => {
-  MensProductModel.find()
-    .then((mens) => {
-      console.log(mens);
-      res.render("Component/product", {
-        mens,
-        title: "Men's Product Adding Form",
+  ProductModel.find()
+    .then((product) => {
+      console.log(product);
+      SubcategoryModel.find().then((result1) => {
+        CategoryModel.find().then((result) => {
+          res.render("Component/product", {
+            displayData: result,
+            displayData1: result1,
+            displayData2: product,
+            title: "Product Adding Form",
+          });
+        });
       });
     })
     .catch((error) => {
-      res.render("Component/product", { Error: `Error Occured: ${mens}` });
+      res.render("Component/product", { Error: `Error Occured: ${product}` });
     });
 };

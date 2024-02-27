@@ -70,8 +70,16 @@ AdminRouter.get("/user", AdminControlller.user);
 // Category Wish Product add
 AdminRouter.get("/category", AdminControlller.categoryadd);
 AdminRouter.post("/catagoryadd",AddController.createcategory);
+
+// SubCategory Wish Product Add
 AdminRouter.get("/subcategory", AdminControlller.subcategoryadd);
+AdminRouter.post("/subcatagoryadd",AddController.createsubcategory);
+AdminRouter.get("/subcatedelet/:id",AddController.subcategorydelete);
+
+
+// Product Add
 AdminRouter.get("/products", AdminControlller.productadd);
+AdminRouter.post("/productadd",AddController.createproduct);
 
 
 

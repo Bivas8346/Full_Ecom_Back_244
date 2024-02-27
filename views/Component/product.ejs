@@ -44,7 +44,7 @@
 
                   <div class="card-style mb-30">
                     <h6 class="mb-25">Input Fields</h6>
-                    <form method="post" action="/mensaddproduct">
+                    <form method="post" action="/productadd">
                       <div class="input-style-1">
                         <label>Product Name</label>
                         <input type="text" name="productname" placeholder="Product Name" />
@@ -52,8 +52,26 @@
                       <!-- end input -->
                       <div class="input-style-1">
                         <label>Product Type</label>
-                        <input type="text" name="producttype" placeholder="Product Type" />
+                        <select name="subcatagoryid" class="form-control">
+                          <option disabled selected>SubCategory</option>
+                          <% for(let subcate of displayData1){ %>
+                          <option value="<%= subcate._id %>">
+                            <%= subcate.subcategory_name %>
+                          </option>
+                          <% } %>
+                        </select>
                       </div>
+                      <div class="input-style-3">
+                        <select name="catagoryid" class="form-control">
+                          <option disabled selected>Category</option>
+                          <% for(let cate of displayData){ %>
+                          <option value="<%= cate._id %>">
+                            <%= cate.Category_name %>
+                          </option>
+                          <% } %>
+                        </select>
+                      </div>
+                      <!-- end input -->
                       <!-- end input -->
                       <div class="input-style-1">
                         <label>Product Description</label>
@@ -120,9 +138,9 @@
                             <!-- end table row-->
                           </thead>
 
-                          <% if(mens.length>0) {%>
+                          <% if(displayData2.length>0) {%>
                           <tbody>
-                            <% for(let ban of mens) {%>
+                            <% for(let ban of displayData2) {%>
                             <tr>
                               <td class="min-width">
                                 <div class="lead">
@@ -135,7 +153,7 @@
                                 <p><a href="#0"><%= ban.productname%></a></p>
                               </td>
                               <td class="min-width">
-                                <p><%= ban.producttype%></p>
+                                <p><%= ban.productdesc%></p>
                               </td>
                               <td>
                                 <div class="action">
@@ -147,7 +165,7 @@
                             </tr>
                             <!-- end table row -->
                           </tbody>
-                          <%}} else {%>
+                          <%}} else {%>No Data Found
                             <% } %>
                         </table>
                         <!-- end table -->

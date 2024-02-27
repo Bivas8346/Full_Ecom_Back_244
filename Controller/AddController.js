@@ -8,6 +8,7 @@ const AboutModel = require("../Model/about");
 const TeamModel = require("../Model/team");
 const CategoryModel = require("../Model/category");
 const SubcategoryModel = require("../Model/subcategory");
+const ProductModel = require("../Model/product");
 
 // bannerpart
 exports.createbanner = (req, res) => {
@@ -329,10 +330,72 @@ exports.createcategory = (req, res) => {
         type: "success",
         message: "added successfully",
       };
-      res.redirect("/");
+      res.redirect("/category");
     })
     .catch((err) => {
       console.log(err, "data not save");
       res.redirect("/category");
+    });
+};
+
+// SubCategory Part
+exports.createsubcategory = (req, res) => {
+  console.log(req.body);
+  const subcategory = new SubcategoryModel({
+    subcategory_name: req.body.subcategory_name,
+    categoryid: req.body.categoryid,
+  });
+  subcategory
+    .save()
+    .then((result) => {
+      req.session.message = {
+        type: "success",
+        message: "Subcategory added successfully",
+      };
+      res.redirect("/subcategory");
+    })
+    .catch((err) => {
+      console.log(err, "data not save");
+      res.redirect("/subcategory");
+    });
+};
+
+exports.subcategorydelete = (req, res) => {
+  const bid = req.params.id;
+  SubcategoryModel.deleteOne({ _id: bid })
+    .then((del) => {
+      console.log(del, "delete successfully");
+      res.redirect("/subcategory");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+// Product Part
+exports.createproduct = (req, res) => {
+  console.log(req.body);
+  const product = new ProductModel({
+    productname: req.body.productname,
+    catagoryid: req.body.catagoryid,
+    subcatagoryid: req.body.subcatagoryid,
+    productdesc: req.body.productdesc,
+    productsize: req.body.productsize,
+    productprice: req.body.productprice,
+    productbrand: req.body.productbrand,
+    productabout: req.body.productabout,
+  });
+  product
+    .save()
+    .then((result) => {
+      req.session.message = {
+        type: "success",
+        message: "Product added successfully",
+      };
+      res.redirect("/products");
+    })
+    .catch((err) => {
+      console.log(err, "data not save");
+      res.redirect("/products");
     });
 };
