@@ -319,11 +319,10 @@ exports.teamdelete = (req, res) => {
 // Category Part
 exports.createcategory = (req, res) => {
   console.log(req.body);
-  const banner = new BannerModel({
-    title: req.body.title,
-    description: req.body.description,
+  const category = new CategoryModel({
+    Category_name: req.body.Category_name,
   });
-  banner
+  category
     .save()
     .then((result) => {
       req.session.message = {
@@ -334,6 +333,6 @@ exports.createcategory = (req, res) => {
     })
     .catch((err) => {
       console.log(err, "data not save");
-      res.redirect("/banneradd");
+      res.redirect("/category");
     });
 };

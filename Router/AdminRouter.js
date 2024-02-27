@@ -69,6 +69,7 @@ AdminRouter.get("/user", AdminControlller.user);
 
 // Category Wish Product add
 AdminRouter.get("/category", AdminControlller.categoryadd);
+AdminRouter.post("/catagoryadd",AddController.createcategory);
 AdminRouter.get("/subcategory", AdminControlller.subcategoryadd);
 AdminRouter.get("/products", AdminControlller.productadd);
 

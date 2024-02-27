@@ -8,6 +8,7 @@ const AdminModel = require("../Model/admin");
 const AboutModel = require("../Model/about");
 const TeamModel = require("../Model/team");
 const UserModel = require("../Model/user");
+const CategoryModel = require("../Model/category");
 const jwt = require("jsonwebtoken");
 const bcryptjs = require("bcryptjs");
 const path = require("path");
@@ -293,16 +294,16 @@ exports.user = (req, res) => {
 
 // Admin Category Part
 exports.categoryadd = (req, res) => {
-  BannerModel.find()
-    .then((banner) => {
-      console.log(banner);
+  CategoryModel.find()
+    .then((cate) => {
+      console.log(cate);
       res.render("Component/Categort", {
-        banner,
+        cate,
         title: "Banner Data Adding Form",
       });
     })
     .catch((error) => {
-      res.render("Component/Categort", { Error: `Error Occured: ${banner}` });
+      res.render("Component/Categort", { Error: `Error Occured: ${cate}` });
     });
 };
 
