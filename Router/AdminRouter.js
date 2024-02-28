@@ -5,6 +5,9 @@ AdminRouter.use(express.static("Fremwork"));
 
 const AdminControlller = require("../Controller/AdminController");
 const AddController = require("../Controller/AddController");
+const UploadProduct = require("../Middleware/ProductImage");
+const UploadTeam = require("../Middleware/TeamImage");
+const UploadBanner = require("../Middleware/BannerImage");
 
 AdminRouter.get("/", AdminControlller.dashbord);
 
@@ -25,7 +28,7 @@ AdminRouter.get("/invoice", AdminControlller.invoice);
 
 // BannerSection
 AdminRouter.get("/banneradd", AdminControlller.banneradd);
-AdminRouter.post("/addbanner", AddController.createbanner);
+AdminRouter.post("/addbanner",UploadBanner.single("image"), AddController.createbanner);
 AdminRouter.get("/deletbanner/:id", AddController.bannerdelete);
 
 // MensProductSection
@@ -59,7 +62,7 @@ AdminRouter.get("/notidelet/:id",AddController.notificationdelete);
 
 // TeamSection
 AdminRouter.get("/team", AdminControlller.Team);
-AdminRouter.post("/teamadd",AddController.createteam);
+AdminRouter.post("/teamadd",UploadTeam.single("image"),AddController.createteam);
 AdminRouter.get("/teamedit/:id",AdminControlller.teamedit);
 AdminRouter.post("/teamupdate",AddController.updateteam);
 AdminRouter.get("/teamdelet/:id",AddController.teamdelete);
@@ -79,7 +82,8 @@ AdminRouter.get("/subcatedelet/:id",AddController.subcategorydelete);
 
 // Product Add
 AdminRouter.get("/products", AdminControlller.productadd);
-AdminRouter.post("/productadd",AddController.createproduct);
+AdminRouter.post("/productadd", UploadProduct.array("image", 5),AddController.createproduct);
+AdminRouter.get("/productdelet/:id",AddController.productdelete);
 
 
 

@@ -6,6 +6,9 @@ const WomensProductModel = require("../Model/womens");
 const KidsProductModel = require("../Model/Kids");
 const AccacorisModel = require("../Model/accacorise");
 const TeamModel = require("../Model/team");
+const CategoryModel = require("../Model/category");
+const SubCategory = require("../Model/subcategory");
+const ProductModel = require("../Model/product");
 const crypto = require("crypto");
 const Razorpay = require("razorpay");
 
@@ -206,6 +209,84 @@ const PaymentVerify = async (req, res) => {
   }
 };
 
+// Find product
+const Product = async (req, res) => {
+  // try {
+  //   const ProductData = await ProductModel.find();
+  //   res
+  //     .status(200)
+  //     .json({ success: true, message: "get About Data", data: ProductData });
+  // } catch (error) {
+  //   res.status(404).json({ sucess: false, message: "No About Data Found!" });
+  // }
+
+  ProductModel.aggregate([
+    {
+      $project: {
+        __v: 0,
+      },
+    },
+    {
+      $lookup: {
+        from: "subcategories",
+        localField: "subcatagoryid",
+        foreignField: "_id",
+        as: "Subcategory_details",
+        pipeline: [
+          {
+            $lookup: {
+              from: "categories",
+              localField: "categoryid",
+              foreignField: "_id",
+              as: "category_details",
+            },
+          },
+        ],
+      },
+    },
+  ])
+    .then((result) => {
+      res.send({ status: true, data: result, message: "All data fatch" });
+    })
+    .catch((err) => {
+      res.send({ status: false, err: err, message: "All data not fatch" });
+    });
+};
+
+const getProductByID = async (req, res) => {
+  ProductModel.aggregate([
+    {
+      $project: {
+        __id: req.body._id,
+      },
+    },
+    {
+      $lookup: {
+        from: "subcategories",
+        localField: "subcatagoryid",
+        foreignField: "_id",
+        as: "Subcategory_details",
+        pipeline: [
+          {
+            $lookup: {
+              from: "categories",
+              localField: "categoryid",
+              foreignField: "_id",
+              as: "category_details",
+            },
+          },
+        ],
+      },
+    },
+  ])
+    .then((result) => {
+      res.send({ status: true, data: result, message: "All data fatch" });
+    })
+    .catch((err) => {
+      res.send({ status: false, err: err, message: "All data not fatch" });
+    });
+};
+
 // cart Part
 
 // const Addcart = async(req,res)=>{
@@ -242,4 +323,6 @@ module.exports = {
   Team,
   Payment,
   PaymentVerify,
+  Product,
+  getProductByID
 };

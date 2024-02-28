@@ -1,3 +1,4 @@
+const path = require("path");
 const BannerModel = require("../Model/banner");
 const MensProductModel = require("../Model/mens");
 const WomensProductModel = require("../Model/womens");
@@ -17,6 +18,9 @@ exports.createbanner = (req, res) => {
     title: req.body.title,
     description: req.body.description,
   });
+  if (req.file) {
+    banner.image = req.file.path;
+  }
   banner
     .save()
     .then((result) => {
@@ -263,6 +267,9 @@ exports.createteam = (req, res) => {
     phone: req.body.phone,
     position: req.body.position,
   });
+  if (req.file) {
+    team.image = req.file.path;
+  }
   team
     .save()
     .then((result) => {
@@ -397,5 +404,17 @@ exports.createproduct = (req, res) => {
     .catch((err) => {
       console.log(err, "data not save");
       res.redirect("/products");
+    });
+};
+
+exports.productdelete = (req, res) => {
+  const bid = req.params.id;
+  ProductModel.deleteOne({ _id: bid })
+    .then((del) => {
+      console.log(del, "delete successfully");
+      res.redirect("/products");
+    })
+    .catch((err) => {
+      console.log(err);
     });
 };

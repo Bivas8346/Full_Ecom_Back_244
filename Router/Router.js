@@ -48,4 +48,8 @@ ApiRouter.get("/Accessoris",Controller.Accessories);
 ApiRouter.post("/Payment",Controller.Payment);
 ApiRouter.post("/PaymentVerify",Controller.PaymentVerify);
 
+// Product  Detail Page
+ApiRouter.get("/product",Controller.Product);
+ApiRouter.post("/singleProduct/:id",Controller.getProductByID)
+
 module.exports = ApiRouter;

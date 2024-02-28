@@ -18,6 +18,9 @@ const TeamSchema = new Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+  },
 });
 
-module.exports = mongoose.model("team",TeamSchema)
+module.exports = mongoose.model("team", TeamSchema);
