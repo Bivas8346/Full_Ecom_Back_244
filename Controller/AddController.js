@@ -230,6 +230,9 @@ exports.createabout = (req, res) => {
     about_content: req.body.about_content,
     about_service: req.body.about_service,
   });
+  if (req.file) {
+    about.image = req.file.path;
+  }
   about
     .save()
     .then((result) => {

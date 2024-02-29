@@ -53,7 +53,7 @@ AdminRouter.get("/accacprodelet/:id",AddController.accacorisdelete);
 
 // AboutSection
 AdminRouter.get("/aboutadd",AdminControlller.aboutadd);
-AdminRouter.post("/addabout",AddController.createabout);
+AdminRouter.post("/addabout",UploadBanner.single("image"),AddController.createabout);
 AdminRouter.get("/aboutdelet/:id",AddController.aboutdelete);
 
 // NotificationSection

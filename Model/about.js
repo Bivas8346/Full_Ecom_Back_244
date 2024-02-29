@@ -9,9 +9,12 @@ const AboutSchema = new Schema({
     type: String,
     required: true,
   },
-  about_service:{
+  about_service: {
     type: String,
-    required:true,
+    required: true,
+  },
+  image: {
+    type: String,
   },
 });
 

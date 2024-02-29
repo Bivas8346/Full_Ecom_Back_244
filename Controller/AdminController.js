@@ -16,12 +16,12 @@ const bcryptjs = require("bcryptjs");
 const path = require("path");
 
 exports.dashbord = (req, res) => {
-  res.render("Component/Dashbord", { title: "Admin Dashbord" });
+  res.render("Component/Dashbord", { title: "Admin Dashbord", adminData: req.admin, });
 };
 
 // Admin Login
 exports.login = (req, res) => {
-  res.render("Component/Login", { title: "Admin Login" });
+  res.render("Component/Login", { title: "Admin Login",  adminData: req.admin,});
 };
 
 exports.logIn = (req, res) => {
