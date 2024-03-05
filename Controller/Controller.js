@@ -9,6 +9,7 @@ const TeamModel = require("../Model/team");
 const CategoryModel = require("../Model/category");
 const SubCategory = require("../Model/subcategory");
 const ProductModel = require("../Model/product");
+const CartModel = require("../Model/cart");
 const crypto = require("crypto");
 const Razorpay = require("razorpay");
 
@@ -48,7 +49,7 @@ const Banner = async (req, res) => {
 // Get all aboutdata from database
 const About = async (req, res) => {
   try {
-    const aboutData = await AboutModel.find();
+    const aboutData = await AboutModel.find().limit(1);
     res
       .status(200)
       .json({ success: true, message: "get About Data", data: aboutData });
@@ -289,24 +290,38 @@ const getProductByID = async (req, res) => {
 
 // cart Part
 
-// const Addcart = async(req,res)=>{
-//     try {
-//         const contactData = await new ContactModel({
-//             about: req.body.about,
-//             email: req.body.email,
-//             message: req.body.message,
-//         })
-//         const contact = await contactData.save();
-//         return res.status(201).json({ success: true, message: "contact data added successfully", data: contact })
-//     }
-//     catch (error) {
-//         return res.status(404).json({ success: false, message: "contact data not added" })
-//     }
-// }
+const Addcart = async (req, res) => {
+  try {
+    const cartData = await new CartModel({
+      user_id: req.body.user_id,
+      products_id: req.body.products_id,
+    });
+    const cart = await cartData.save();
+    return res.status(201).json({
+      success: true,
+      message: "cart data added successfully",
+      data: cart,
+    });
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ success: false, message: "cart data not added" });
+  }
+};
 
-// const Removecart = async(req,res)=>{
-
-// }
+const Removecart = async (req, res) => {
+  try {
+    const bid = req.params.id;
+    const cartsData = await CartModel.deleteOne({ _id: bid })
+    res.status(200).json({
+      success: true,
+      data: cartsData,
+      message: "User Cart Products Delete",
+    });
+  } catch (error) {
+    return res.status(400).json({ success: false, message: "Data Not Deleted" });
+  }
+};
 
 // const  Updatecart = async(req,res)=>{
 
@@ -324,5 +339,7 @@ module.exports = {
   Payment,
   PaymentVerify,
   Product,
-  getProductByID
+  getProductByID,
+  Addcart,
+  Removecart,
 };

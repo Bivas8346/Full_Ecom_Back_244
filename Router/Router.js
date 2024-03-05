@@ -50,6 +50,11 @@ ApiRouter.post("/PaymentVerify",Controller.PaymentVerify);
 
 // Product  Detail Page
 ApiRouter.get("/product",Controller.Product);
-ApiRouter.post("/singleProduct/:id",Controller.getProductByID)
+ApiRouter.post("/singleProduct/:id",Controller.getProductByID);
+
+// Cart Part
+ApiRouter.post("/addToCart",Controller.Addcart);
+// ApiRouter.put("/updateQuantity/:id",Controller.Updatequantity);
+ApiRouter.get("/removeFromCart/:id",Controller.Removecart);
 
 module.exports = ApiRouter;
